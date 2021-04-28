@@ -6,16 +6,17 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import oop_lab3.local_plugins.Plugins;
-import oop_lab3.services.AppService;
-import oop_lab3.services.StateService;
 import oop_lab3.entity.Worker;
+import oop_lab3.local_plugins.Plugins;
+import oop_lab3.proxy.BinarySerializationMethodProxy;
+import oop_lab3.proxy.TextSerializationMethodProxy;
+import oop_lab3.proxy.XMLSerializationMethodProxy;
 import oop_lab3.serialization.BinarySerializationDeserialization;
-import oop_lab3.serialization.SerializationDeserialization;
+import oop_lab3.serialization.SerializationDeserializationService;
 import oop_lab3.serialization.TextSerializationDeserialization;
 import oop_lab3.serialization.XMLSerializationDeserialization;
-import oop_lab3.services.ZIP2Service;
-import oop_lab3.services.ZipService;
+import oop_lab3.services.AppService;
+import oop_lab3.services.StateService;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -103,7 +104,7 @@ public class Controller {
             Plugins.ZIP_PLUGIN.setInclude(checkBoxToZip.isSelected());
         });
 
-        checkBoxZip2.setOnAction(ActionEvent ->{
+        checkBoxZip2.setOnAction(ActionEvent -> {
             Plugins.ZIP2_PLUGIN.setInclude(checkBoxZip2.isSelected());
         });
     }
@@ -190,7 +191,7 @@ public class Controller {
 
     public void openFile(ActionEvent actionEvent) throws FileNotFoundException {
         File file = AppService.getInstance().openFile();
-        SerializationDeserialization deserialization = new BinarySerializationDeserialization();
+        SerializationDeserializationService deserialization = new BinarySerializationDeserialization();
 
         if (xmlMethod.isSelected()) {
             deserialization = new XMLSerializationDeserialization();
@@ -213,21 +214,24 @@ public class Controller {
     public void saveFile(ActionEvent actionEvent) {
         File file = AppService.getInstance().saveFile();
 
-        SerializationDeserialization serialization = new BinarySerializationDeserialization();
+        SerializationDeserializationService serialization = new BinarySerializationDeserialization();
         if (xmlMethod.isSelected()) {
-            serialization = new XMLSerializationDeserialization();
-        }else {
+            serialization = new XMLSerializationMethodProxy();
+        } else {
             if (textMethod.isSelected()) {
-                serialization = new TextSerializationDeserialization();
-            }else{
+                serialization = new TextSerializationMethodProxy();
+            } else {
                 if (binaryMethod.isSelected()) {
-                    serialization = new BinarySerializationDeserialization();
+                    serialization = new BinarySerializationMethodProxy();
                 }
             }
         }
 
         serialization.serialize(state.getObservableList(), file);
-        ZipService.getInstance().convertToZip(file);
-        ZIP2Service.getInstance().convertZip(file);
+
+
+//        serialization.serialize(state.getObservableList(), file);
+//        ZipService.getInstance().convertToZip(file);
+//        ZIP2Service.getInstance().convertZip(file);
     }
 }

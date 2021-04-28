@@ -7,7 +7,7 @@ import oop_lab3.entity.Worker;
 
 import java.io.*;
 
-public class BinarySerializationDeserialization extends SerializationDeserialization {
+public class BinarySerializationDeserialization implements SerializationDeserializationService {
 
     @Override
     public void serialize(ObservableList<Worker> workers, File file) {

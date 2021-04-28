@@ -5,7 +5,7 @@ import oop_lab3.entity.Worker;
 
 import java.util.Objects;
 
-public class Developer extends ITWorker {
+public class Developer extends ITWorker implements DeveloperWork{
     private ProgramLanguage programLanguage;
     private Tester tester;
 
@@ -18,6 +18,11 @@ public class Developer extends ITWorker {
         this.programLanguage = programLanguage;
         this.tester = tester;
         this.typeOfWorker = "Developer";
+    }
+
+    @Override
+    public String writeCode() {
+        return "Write a code.";
     }
 
     public enum ProgramLanguage {
@@ -36,11 +41,6 @@ public class Developer extends ITWorker {
 
     public void setProgramLanguage(ProgramLanguage programLanguage) {
         this.programLanguage = programLanguage;
-    }
-
-    @Override
-    public void work() {
-        System.out.println("Write a code.");
     }
 
     public Tester getTester() {

@@ -8,11 +8,13 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.InputEvent;
 import javafx.stage.Stage;
+import oop_lab3.adapter.AccountantAdapter;
+import oop_lab3.services.InfoAboutWorkService;
 import oop_lab3.services.StateService;
 import oop_lab3.entity.bank_workers.Accountant;
 
 
-public class ControllerWindowAccountant implements EditController<Accountant>{
+public class ControllerWindowAccountant implements EditController<Accountant> {
 
     public TextField nameOfBankTextField;
     @FXML
@@ -36,6 +38,7 @@ public class ControllerWindowAccountant implements EditController<Accountant>{
     private Button btnEdit;
 
     private final StateService state = StateService.getInstance();
+    private final InfoAboutWorkService infoAboutWorkService = InfoAboutWorkService.getInstance();
 
     @FXML
     void initialize() {
@@ -59,8 +62,8 @@ public class ControllerWindowAccountant implements EditController<Accountant>{
             btnEdit.setVisible(false);
         }
     }
-    
-    void initChoiceBox(){
+
+    void initChoiceBox() {
         knowledgeOfExcelChoiceBox.getItems().add(Boolean.TRUE);
         knowledgeOfExcelChoiceBox.getItems().add(Boolean.FALSE);
         knowledgeOfExcelChoiceBox.setValue(Boolean.TRUE);
@@ -82,7 +85,7 @@ public class ControllerWindowAccountant implements EditController<Accountant>{
         System.out.println(state.getObservableList());
         ((Stage) (((Node) event.getSource()).getScene().getWindow())).close();
     }
-    
+
 
     @Override
     public Accountant getEntity() {
@@ -90,7 +93,7 @@ public class ControllerWindowAccountant implements EditController<Accountant>{
         accountant.setFirstName(firstNameTextField.getText());
         accountant.setLastName(lastNameTextField.getText());
         accountant.setAge(Integer.parseInt(ageTextField.getText()));
-        accountant.setResume(resumeTextField.getText());
+        accountant.setResume(resumeTextField.getText() + "+" + infoAboutWorkService.printAboutWork(new AccountantAdapter(accountant)));
         accountant.setKnowledgeOfExcel(knowledgeOfExcelChoiceBox.getValue());
         accountant.setNameOfBank(nameOfBankTextField.getText());
         return accountant;

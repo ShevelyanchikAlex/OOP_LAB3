@@ -24,8 +24,6 @@ public abstract class Worker implements Serializable {
 
     public abstract Worker fromString(String str);
 
-    public abstract void work();
-
     public abstract String getTypeOfWorker();
 
     public String getFirstName() {

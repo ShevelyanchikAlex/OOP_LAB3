@@ -5,7 +5,7 @@ import oop_lab3.entity.Worker;
 
 import java.util.Objects;
 
-public class Accountant extends BankWorker {
+public class Accountant extends BankWorker implements AccountantWork{
     private boolean isKnowledgeOfExcel;
 
     public Accountant(String firstName, String lastName, int age, String resume, String nameOfBank, boolean isKnowledgeOfExcel) {
@@ -19,8 +19,8 @@ public class Accountant extends BankWorker {
     }
 
     @Override
-    public void work() {
-        System.out.println("Calculate workers salaries.");
+    public String calculationOfSalaries() {
+        return "Calculate workers salaries.";
     }
 
     @Override

@@ -42,7 +42,7 @@ public class AppService {
         try {
             return fileChooser.showOpenDialog(null);
         } catch (NullPointerException e) {
-            System.out.println("error: " + e);
+            System.out.println("Error: " + e);
         }
         return null;
     }

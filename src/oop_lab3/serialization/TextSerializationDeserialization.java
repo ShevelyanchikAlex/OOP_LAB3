@@ -10,7 +10,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 
-public class TextSerializationDeserialization extends SerializationDeserialization {
+public class TextSerializationDeserialization implements SerializationDeserializationService {
 
     @Override
     public void serialize(ObservableList<Worker> workers, File file) {
@@ -26,12 +26,11 @@ public class TextSerializationDeserialization extends SerializationDeserializati
     public ObservableList<Worker> deserialize(File file) {
         ObservableList<Worker> workers = FXCollections.observableArrayList();
         try (BufferedReader bufferreader = new BufferedReader(new FileReader(file))) {
-            String typeOfWorker;
-            while ((typeOfWorker = bufferreader.readLine()) != null) {
-                workers.add(WorkerFactory.workerFactory(typeOfWorker.substring(0, typeOfWorker.indexOf('-'))).fromString(typeOfWorker));
+            String worker;
+            while ((worker = bufferreader.readLine()) != null) {
+                workers.add(WorkerFactory.workerFactory(worker.substring(0, worker.indexOf('-'))).fromString(worker));
             }
         } catch (Exception ignored) {
-            System.out.println(ignored);
         }
         return workers;
     }

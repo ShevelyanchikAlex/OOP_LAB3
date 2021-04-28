@@ -5,7 +5,7 @@ import oop_lab3.entity.Worker;
 
 import java.util.Objects;
 
-public class Tester extends ITWorker {
+public class Tester extends ITWorker implements TesterWork {
 
     private TypeOfTester typeOfTester;
 
@@ -20,8 +20,8 @@ public class Tester extends ITWorker {
     }
 
     @Override
-    public void work() {
-        System.out.println("Test software.");
+    public String testSoftware() {
+        return "Test software.";
     }
 
     @Override
@@ -55,7 +55,7 @@ public class Tester extends ITWorker {
                 "-" + age +
                 "-" + resume +
                 "-" + typeOfTester +
-                '\r'+
+                '\r' +
                 '\n';
     }
 

@@ -10,6 +10,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.InputEvent;
 import javafx.stage.Stage;
+import oop_lab3.adapter.FinancialAnalystAdapter;
+import oop_lab3.services.InfoAboutWorkService;
 import oop_lab3.services.StateService;
 import oop_lab3.entity.bank_workers.FinancialAnalyst;
 
@@ -46,6 +48,7 @@ public class ControllerWindowFinancialAnalyst implements EditController<Financia
     private TextField nameOfBankTextField;
 
     private final StateService state = StateService.getInstance();
+    private final InfoAboutWorkService infoAboutWorkService = InfoAboutWorkService.getInstance();
 
     @FXML
     void initialize() {
@@ -95,7 +98,7 @@ public class ControllerWindowFinancialAnalyst implements EditController<Financia
         financialAnalyst.setFirstName(firstNameTextField.getText());
         financialAnalyst.setLastName(lastNameTextField.getText());
         financialAnalyst.setAge(Integer.parseInt(ageTextField.getText()));
-        financialAnalyst.setResume(resumeTextField.getText());
+        financialAnalyst.setResume(resumeTextField.getText() + "+" + infoAboutWorkService.printAboutWork(new FinancialAnalystAdapter(financialAnalyst)));
         financialAnalyst.setAvailabilityOfInternationalCertificate(isAvailabilityOfInternationalCertificateis.getValue());
         financialAnalyst.setNameOfBank(nameOfBankTextField.getText());
         return financialAnalyst;

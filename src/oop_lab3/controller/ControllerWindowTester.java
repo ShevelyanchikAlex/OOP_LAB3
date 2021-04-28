@@ -8,6 +8,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.InputEvent;
 import javafx.stage.Stage;
+import oop_lab3.adapter.TesterAdapter;
+import oop_lab3.services.InfoAboutWorkService;
 import oop_lab3.services.StateService;
 import oop_lab3.entity.it_workers.Tester;
 
@@ -37,6 +39,8 @@ public class ControllerWindowTester implements EditController<Tester> {
     private TextField inputNameOfCompany;
 
     private final StateService state = StateService.getInstance();
+    private final InfoAboutWorkService infoAboutWorkService = InfoAboutWorkService.getInstance();
+
 
     @FXML
     void initialize() {
@@ -93,7 +97,7 @@ public class ControllerWindowTester implements EditController<Tester> {
         tester.setAge(Integer.parseInt(inputAge.getText()));
         tester.setNameOfItCompany(inputNameOfCompany.getText());
         tester.setTypeOfTester(typeOfTesterChoiceBox.getValue());
-        tester.setResume(inputResume.getText());
+        tester.setResume(inputResume.getText() + "+" + infoAboutWorkService.printAboutWork(new TesterAdapter(tester)));
         return tester;
     }
 

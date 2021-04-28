@@ -9,7 +9,7 @@ import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
 import java.io.*;
 
-public class XMLSerializationDeserialization extends SerializationDeserialization {
+public class XMLSerializationDeserialization implements SerializationDeserializationService {
 
     @Override
     public void serialize(ObservableList<Worker> workers, File file) {

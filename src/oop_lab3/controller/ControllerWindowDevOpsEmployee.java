@@ -8,6 +8,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.InputEvent;
 import javafx.stage.Stage;
+import oop_lab3.adapter.DevOpsEmployeeAdapter;
+import oop_lab3.services.InfoAboutWorkService;
 import oop_lab3.services.StateService;
 import oop_lab3.entity.it_workers.DevOpsEmployee;
 
@@ -47,6 +49,7 @@ public class ControllerWindowDevOpsEmployee implements EditController<DevOpsEmpl
     private TextField inputNameOfCompany;
 
     private final StateService state = StateService.getInstance();
+    private final InfoAboutWorkService infoAboutWorkService = InfoAboutWorkService.getInstance();
 
     @FXML
     void initialize() {
@@ -71,7 +74,7 @@ public class ControllerWindowDevOpsEmployee implements EditController<DevOpsEmpl
         }
     }
 
-    void initChoiceBox(){
+    void initChoiceBox() {
         knowledgeOfLinuxChoiceBox.getItems().add(Boolean.TRUE);
         knowledgeOfLinuxChoiceBox.getItems().add(Boolean.FALSE);
         knowledgeOfLinuxChoiceBox.setValue(Boolean.TRUE);
@@ -98,7 +101,7 @@ public class ControllerWindowDevOpsEmployee implements EditController<DevOpsEmpl
         devOpsEmployee.setAge(Integer.parseInt(inputAge.getText()));
         devOpsEmployee.setNameOfItCompany(inputNameOfCompany.getText());
         devOpsEmployee.setKnowledgeOfLinux(knowledgeOfLinuxChoiceBox.getValue());
-        devOpsEmployee.setResume(inputResume.getText());
+        devOpsEmployee.setResume(inputResume.getText() + "+" + infoAboutWorkService.printAboutWork(new DevOpsEmployeeAdapter(devOpsEmployee)));
         return devOpsEmployee;
     }
 

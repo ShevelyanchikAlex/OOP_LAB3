@@ -5,7 +5,7 @@ import oop_lab3.entity.Worker;
 
 import java.util.Objects;
 
-public class FinancialAnalyst extends BankWorker {
+public class FinancialAnalyst extends BankWorker implements FinancialAnalystWork {
     private boolean isAvailabilityOfInternationalCertificate;
 
     public FinancialAnalyst() {
@@ -19,8 +19,8 @@ public class FinancialAnalyst extends BankWorker {
     }
 
     @Override
-    public void work() {
-        System.out.println("Calculate finance analytics.");
+    public String calculateFinanceAnalytics() {
+        return "Calculate finance analytics.";
     }
 
     @Override
@@ -45,7 +45,7 @@ public class FinancialAnalyst extends BankWorker {
                 "-" + age +
                 "-" + resume +
                 "-" + isAvailabilityOfInternationalCertificate +
-                '\r'+
+                '\r' +
                 '\n';
     }
 
@@ -67,4 +67,5 @@ public class FinancialAnalyst extends BankWorker {
     public int hashCode() {
         return Objects.hash(isAvailabilityOfInternationalCertificate);
     }
+
 }

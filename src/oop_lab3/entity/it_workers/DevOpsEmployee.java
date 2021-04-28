@@ -5,7 +5,7 @@ import oop_lab3.entity.Worker;
 
 import java.util.Objects;
 
-public class DevOpsEmployee extends ITWorker {
+public class DevOpsEmployee extends ITWorker implements DevOpsEmployeeWork {
 
     private boolean knowledgeOfLinux;
 
@@ -20,8 +20,8 @@ public class DevOpsEmployee extends ITWorker {
     }
 
     @Override
-    public void work() {
-        System.out.println("Deliver code to prod and automate systems.");
+    public String deliverCodeToProd() {
+        return "Deliver code to prod and automate systems.";
     }
 
     @Override
@@ -68,4 +68,6 @@ public class DevOpsEmployee extends ITWorker {
     public int hashCode() {
         return Objects.hash(knowledgeOfLinux);
     }
+
+
 }

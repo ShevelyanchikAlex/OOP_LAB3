@@ -8,6 +8,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.InputEvent;
 import javafx.stage.Stage;
+import oop_lab3.adapter.DeveloperAdapter;
+import oop_lab3.services.InfoAboutWorkService;
 import oop_lab3.services.StateService;
 import oop_lab3.entity.Worker;
 import oop_lab3.entity.it_workers.Developer;
@@ -44,6 +46,8 @@ public class ControllerWindowDeveloper implements EditController<Developer> {
     private ChoiceBox<Tester> testerChoiceBox;
 
     private final StateService state = StateService.getInstance();
+    private final InfoAboutWorkService infoAboutWorkService = InfoAboutWorkService.getInstance();
+
 
     @FXML
     void initialize() {
@@ -114,7 +118,7 @@ public class ControllerWindowDeveloper implements EditController<Developer> {
         developer.setAge(Integer.parseInt(inputAge.getText()));
         developer.setNameOfItCompany(inputNameOfCompany.getText());
         developer.setProgramLanguage(choiceBox.getValue());
-        developer.setResume(inputResume.getText());
+        developer.setResume(inputResume.getText() + "+" + infoAboutWorkService.printAboutWork(new DeveloperAdapter(developer)));
         developer.setTester(testerChoiceBox.getValue());
         return developer;
     }
