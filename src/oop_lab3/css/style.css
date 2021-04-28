@@ -1,0 +1,6 @@
+.button{
+    -fx-color:black;
+    -fx-padding:5px;
+    -fx-background-color:#EDBB99;
+    -fx-background-radius: 5px;
+}
